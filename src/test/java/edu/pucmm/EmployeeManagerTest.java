@@ -5,6 +5,7 @@ import edu.pucmm.exception.DuplicateEmployeeException;
 import edu.pucmm.exception.EmployeeNotFoundException;
 import edu.pucmm.exception.InvalidSalaryException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -201,5 +202,13 @@ public class EmployeeManagerTest {
         assertThrows(DuplicateEmployeeException.class, () -> {
             employeeManager.addEmployee(employee1);
         });
+    }
+
+    @Test
+    @DisplayName("Test para probar position nula y salario negativo")
+    public void testIsSalaryValidForPositionWithNullPositionAndNegativeSalary() {
+        assertFalse(employeeManager.isSalaryValidForPosition(null, -1000));
+        assertFalse(employeeManager.isSalaryValidForPosition(null, 50000));
+        assertFalse(employeeManager.isSalaryValidForPosition(juniorDeveloper, -1000));
     }
 }
